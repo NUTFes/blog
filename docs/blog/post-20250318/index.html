@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="ja"><head>
+  <meta charset="utf-8">
+  <title>NUTMEG | 長岡技術科学大学 技大祭実行委員会 情報局</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今回は私たちのプロダクトであるGroup-Manager-2（以下、GM2とします。）のユーザ画面のデザイン改修に伴い、Vue.js→NextJsに移行しました。その際に個人的に導入して見たかったscaffdogとstorybookを導入して開発効率の向上を図ってみました">
+  <meta name="author" content="NUTMEG">
+  <meta name="generator" content="Hugo 0.127.0">
+
+  <!-- plugins -->
+  
+  <link rel="stylesheet" href="https://blog.nutmeg.cloud/plugins/bootstrap/bootstrap.min.css ">
+  
+  <link rel="stylesheet" href="https://blog.nutmeg.cloud/plugins/slick/slick.css ">
+  
+  <link rel="stylesheet" href="https://blog.nutmeg.cloud/plugins/themify-icons/themify-icons.css ">
+  
+  <link rel="stylesheet" href="https://blog.nutmeg.cloud/plugins/venobox/venobox.css ">
+  
+
+  <!-- Main Stylesheet -->
+  
+  <link rel="stylesheet" href="https://blog.nutmeg.cloud/scss/style.min.css" media="screen">
+
+  <!--Favicon-->
+  <link rel="shortcut icon" href="https://blog.nutmeg.cloud/images/favicon.png " type="image/x-icon">
+  <link rel="icon" href="https://blog.nutmeg.cloud/images/favicon.png " type="image/x-icon">
+
+  
+  <link rel="stylesheet" href="https://blog.nutmeg.cloud/css/custom_post.css">
+  
+
+  <meta property="og:url" content="https://blog.nutmeg.cloud/blog/post-20250318/">
+  <meta property="og:site_name" content="NUTMEG | 長岡技術科学大学 技大祭実行委員会 情報局">
+  <meta property="og:title" content="scaffdogのすゝめ">
+  <meta property="og:description" content="今回は私たちのプロダクトであるGroup-Manager-2（以下、GM2とします。）のユーザ画面のデザイン改修に伴い、Vue.js→NextJsに移行しました。その際に個人的に導入して見たかったscaffdogとstorybookを導入して開発効率の向上を図ってみました">
+  <meta property="og:locale" content="ja">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="blog">
+    <meta property="article:published_time" content="2025-03-18T00:35:57+09:00">
+    <meta property="article:modified_time" content="2025-03-18T00:35:57+09:00">
+    <meta property="article:tag" content="TypeScript">
+    <meta property="article:tag" content="Next.js">
+    <meta property="article:tag" content="フロントエンド">
+    <meta property="og:image" content="https://blog.nutmeg.cloud/images/OGP.png">
+
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://blog.nutmeg.cloud/images/OGP.png">
+  <meta name="twitter:title" content="scaffdogのすゝめ">
+  <meta name="twitter:description" content="今回は私たちのプロダクトであるGroup-Manager-2（以下、GM2とします。）のユーザ画面のデザイン改修に伴い、Vue.js→NextJsに移行しました。その際に個人的に導入して見たかったscaffdogとstorybookを導入して開発効率の向上を図ってみました">
+
+
+  <!-- google analitycs -->
+  <script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'Your ID', 'auto');
+    ga('send', 'pageview');
+  </script>
+
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q71WVEHHBF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+  gtag('config', 'G-Q71WVEHHBF');
+  </script>
+</head>
+<body>
+<!-- preloader start -->
+<div class="preloader">
+  
+</div>
+<!-- preloader end -->
+<!-- navigation -->
+<header class="navigation">
+  <div class="container">
+    
+    <nav class="navbar navbar-expand-lg navbar-white bg-transparent border-bottom pl-0">
+      <a class="navbar-brand mobile-view" href="https://blog.nutmeg.cloud/"><img class="img-fluid"
+          src="https://blog.nutmeg.cloud/images/NUTMEG-logo_all_color_horizontal.png" alt="NUTMEG | 長岡技術科学大学 技大祭実行委員会 情報局"></a>
+      <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navigation">
+        <i class="ti-menu h3"></i>
+      </button>
+
+      <div class="collapse navbar-collapse text-center" id="navigation">
+        <div class="desktop-view">
+          <ul class="navbar-nav mr-auto">
+            
+            <li class="nav-item">
+              <a class="nav-link" href="https://twitter.com/nutfes_nutmeg"><i class="ti-twitter-alt"></i></a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.instagram.com/nutfes/?hl=ja"><i class="ti-instagram"></i></a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="nav-link" href="https://github.com/orgs/NUTFes"><i class="ti-github"></i></a>
+            </li>
+            
+          </ul>
+        </div>
+
+        <a class="navbar-brand mx-auto desktop-view" href="https://blog.nutmeg.cloud/"><img class="img-fluid"
+            src="https://blog.nutmeg.cloud/images/NUTMEG-logo_all_color_horizontal.png" alt="NUTMEG | 長岡技術科学大学 技大祭実行委員会 情報局"></a>
+
+        <ul class="navbar-nav">
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="https://blog.nutmeg.cloud/about">About</a>
+          </li>
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="https://blog.nutmeg.cloud/blog">Post</a>
+          </li>
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="https://blog.nutmeg.cloud/products">Products</a>
+          </li>
+          
+          
+          
+          <li class="nav-item">
+            <a class="nav-link" href="https://blog.nutmeg.cloud/members">Members</a>
+          </li>
+          
+          
+        </ul>
+
+        
+        <!-- search -->
+        <div class="search pl-lg-4">
+          <button id="searchOpen" class="search-btn"><i class="ti-search"></i></button>
+          <div class="search-wrapper">
+            <form action="https://blog.nutmeg.cloud//search" class="h-100">
+              <input class="search-box px-4" id="search-query" name="s" type="search" placeholder="Type & Hit Enter...">
+            </form>
+            <button id="searchClose" class="search-close"><i class="ti-close text-dark"></i></button>
+          </div>
+        </div>
+        
+
+        
+      </div>
+    </nav>
+  </div>
+</header>
+<!-- /navigation -->
+
+<section class="section-sm">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        
+        <a href="https://blog.nutmeg.cloud/categories/%e6%b4%bb%e5%8b%95%e3%81%ae%e6%a7%98%e5%ad%90"
+          class="text-primary">活動の様子</a>
+        
+        <h2>scaffdogのすゝめ</h2>
+        <div class="mb-3 post-meta">
+          <span class="author">
+            
+            
+            <p>
+              
+              
+              By 比嘉華
+              
+              
+              
+              
+              <span class="border-bottom border-primary px-2 mx-1"></span>
+              18 March 2025
+              
+            </p>
+          </span>
+        </div>
+        
+        <img src="https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_1d1abf737dde670b400efa9e407bb93c.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&amp;Expires=1742226461&amp;Signature=h4s3499qtDa22F4RrrosdKKGI/g%3D" class="img-fluid w-100 mb-4" alt="scaffdogのすゝめ">
+        
+        <div class="content mb-5">
+          <h2 id="始めに">始めに</h2>
+<p>皆さんこんにちは。
+モンハンワイルズライフをエンジョイ中の比嘉華です！</p>
+<p>今回は私たちのプロダクトであるGroup-Manager-2（以下、GM2とします。）のユーザ画面のデザイン改修に伴い、Vue.js→Next.jsに移行しました。その際に個人的に導入して見たかったscaffdogとstorybookを導入して開発効率の向上を図ってみました。</p>
+<p>Group-Manager-2とは、技大祭に参加する団体の申請から、その参加団体の情報管理までを担うアプリケーションです。参加団体側と実行委員側の負担を減らし、技大祭が円滑に進むよう開発しています。NUTMEG内の最古のWebアプリケーションになっています。</p>
+<h2 id="scaffdogとは">scaffdogとは</h2>
+<p>scaffdogは、Markdownを利用してプロジェクトの初期設定やコードの雛形を自動生成するツールです。Markdown形式でテンプレートを定義できるため書きやすく、<code>scaffdog init</code>コマンドでセットアップが爆速にできることが特徴です。</p>
+<h2 id="storybookとは">Storybookとは</h2>
+<p>Storybookは、UIを個別に構築するためのワークショップを提供します。アプリ全体を実行することなく、到達が困難な状態やエッジケースを開発するのに役立ちます。</p>
+<p>まずはStorybookの概要について簡単に説明します。</p>
+<p>StorybookとはUIコンポーネント開発環境を提供するオープンソースのツールです。</p>
+<p>各componentのUIやpropsに応じた挙動の確認、component単位でドキュメントの用意が可能です。</p>
+<p>React、Vue、Angularなどの主要なJSフレームワークで導入でき、利用範囲も広くなっています。</p>
+<h2 id="scaffdogによるテンプレート作成">scaffdogによるテンプレート作成</h2>
+<p>ディレクトリ構成としては以下のようになります。</p>
+<pre tabindex="0"><code>📁app
+    📁.scaffdog
+        📄config.js
+        📄template.md
+    📁.storybook
+        📄main.js
+        📄preview.ts
+    📁src
+        📁components
+            📁[generate]
+                📄[generate].stories.tsx
+                📄[generate].tsx
+                📄index.ts
+</code></pre><h3 id="1-storybookをインストールする">1. storybookをインストールする。</h3>
+<p>GM2ではpnpmを使用しているため、pnpmでのコマンドを掲示します。必要であればnpmなどに変えて実行すると同様に実装できると思います。</p>
+<pre tabindex="0"><code>npx storybook init
+</code></pre><p>こちらのコマンドを実行することで、.storybook配下が自動的に作成されます。また、src/stories配下にサンプルが生成されていますが使う予定がない場合は削除して大丈夫です！</p>
+<h3 id="2-storybookの環境を作る">2. storybookの環境を作る。</h3>
+<p>生成したものに加えて設定を追加していきます。</p>
+<p>追加するものとしては</p>
+<ul>
+<li>テーマカラー設定</li>
+<li>autodocsの導入</li>
+</ul>
+<p>まずテーマカラー設定をします。個人的にダークテーマが大好きなので実装しまました。そのため、読み飛ばしても大丈夫です。
+storybookが提供しているThemingを使います。</p>
+<p><a href="https://storybook.js.org/docs/configure/user-interface/theming">Theming | Storybook docs</a></p>
+<pre tabindex="0"><code>pnpm add --save-dev @storybook/manager-api @storybook/theming
+</code></pre><p>インストール後、preview.tsを以下のように書き換えてください。</p>
+<pre tabindex="0"><code>import type { Preview } from &#39;@storybook/react&#39;;
+import { themes } from &#39;@storybook/theming&#39;;
+
+const preview: Preview = {
+  parameters: {
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/i,
+      },
+    },
+    docs: {
+      theme: themes.dark,
+    },
+  },
+};
+
+export default preview;
+</code></pre><p>次に、autodocsを追加します。autodocsを追加するとshow codeでコードを見ることができて便利！と思ったので導入していきます。</p>
+<pre tabindex="0"><code>pnpm add @storybook/addon-docs
+</code></pre><p>でインストールし、main.tsのaddonsに追記します。</p>
+<pre tabindex="0"><code>  addons: [
+		~略~
+    &#39;@storybook/addon-docs&#39;,
+  ],
+</code></pre><p>その後、preview.tsにtagsを設定します。</p>
+<pre tabindex="0"><code>const preview: Preview = {
+  tags: [&#39;autodocs&#39;],
+  parameters: ~略~
+</code></pre><h3 id="3-scaffdogをインストールする">3. scaffdogをインストールする</h3>
+<pre tabindex="0"><code>pnpm install scaffdog
+
+pnpm run scaffdog init
+
+&gt; app@0.1.0 scaffdog /app
+&gt; scaffdog &#34;init&#34;
+
+? Please enter a document name. template
+                                                                                                                                                                                               
+Setup of scaffdog 🐶 is complete!                                                                                                                                                              
+
+  ✔ .scaffdog/config.js
+  ✔ .scaffdog/template.md
+
+Now you can do scaffold by running $ scaffdog generate.
+
+Please refer to the following documents and customize it.
+https://scaff.dog/docs/templates
+</code></pre><p><code>pnpm run scaffdog init</code> コマンドで.scaffdogフォルダを作成し、テンプレートとなるmdファイルの名称を決めることができます。</p>
+<p>今回はtemplateとしています。</p>
+<h3 id="4-scaffdogの環境を作る">4. scaffdogの環境を作る。</h3>
+<p>template.mdが作成されたら中身を更新していきます。</p>
+<pre tabindex="0"><code>---
+name: &#34;template&#34;
+root: &#34;.&#34;
+output: &#34;src/components&#34;
+ignore: []
+questions:
+  name: &#34;Please enter components name.&#34;
+---
+
+# `{{ inputs.name | pascal }}/index.ts`
+
+```typescript
+export { default } from &#34;./{{ inputs.name | pascal }}&#34;;
+```
+
+# `{{ inputs.name | pascal }}/{{ inputs.name | pascal }}.stories.tsx`
+
+```typescript
+import { Meta, StoryObj } from &#39;@storybook/react&#39;;
+import {{ inputs.name | pascal }} from &#39;./{{ inputs.name | pascal }}&#39;;
+import &#34;@globals&#34;;
+
+export default {
+title: &#39;Components/{{ inputs.name | pascal }}&#39;,
+tags: [&#34;autodocs&#34;],
+component: {{ inputs.name | pascal }},
+parameters: {
+    docs: {
+      source: {
+        type: &#34;auto&#34;,
+      },
+    },
+  },
+} as Meta&lt;typeof {{ inputs.name | pascal }}&gt;;
+
+type Story = StoryObj&lt;typeof {{ inputs.name | pascal }}&gt;;
+
+export const Default: Story = {
+  args: {
+
+  },
+};
+```
+
+# `{{ inputs.name | pascal }}/{{ inputs.name | pascal }}.tsx`
+
+```typescript
+import { FC } from &#39;react&#39;;
+
+type {{ inputs.name | pascal }}Props = {};
+
+const {{ inputs.name | pascal }}: FC&lt;{{ inputs.name | pascal }}Props&gt; = () =&gt; {
+return &lt;div&gt;{{ inputs.name }} Component&lt;/div&gt;;
+};
+
+export default {{ inputs.name | pascal}};
+```
+
+```
+
+ファイル自体は三つ作成します。
+
+- index.tsx
+- {generate}.stroies.tsx
+- {generate}.tsx
+
+です！
+
+ここでは、出力先を設定します。
+
+```
+---
+name: &#34;template&#34;
+root: &#34;.&#34;
+output: &#34;src/components&#34;
+ignore: []
+questions:
+  name: &#34;Please enter components name.&#34;
+---
+</code></pre><p>ここでindex.tsxを作成し、importが簡略されるようにしています。</p>
+<pre tabindex="0"><code># `{{ inputs.name | pascal }}/index.ts`
+
+```typescript
+export { default } from &#34;./{{ inputs.name | pascal }}&#34;;
+```
+</code></pre><p>ここでstroies.tsxの設定を記述しています。コンポーネントを確認する際はargsにpropsを入れてください。</p>
+<pre tabindex="0"><code># `{{ inputs.name | pascal }}/{{ inputs.name | pascal }}.stories.tsx`
+
+```typescript
+import { Meta, StoryObj } from &#39;@storybook/react&#39;;
+import {{ inputs.name | pascal }} from &#39;./{{ inputs.name | pascal }}&#39;;
+import &#34;@globals&#34;;
+
+export default {
+title: &#39;Components/{{ inputs.name | pascal }}&#39;,
+tags: [&#34;autodocs&#34;],
+component: {{ inputs.name | pascal }},
+parameters: {
+    docs: {
+      source: {
+        type: &#34;auto&#34;,
+      },
+    },
+  },
+} as Meta&lt;typeof {{ inputs.name | pascal }}&gt;;
+
+type Story = StoryObj&lt;typeof {{ inputs.name | pascal }}&gt;;
+
+export const Default: Story = {
+  args: {
+
+  },
+};
+```
+</code></pre><p>ここでは、コンポーネントの雛形を作成しています。</p>
+<pre tabindex="0"><code># `{{ inputs.name | pascal }}/{{ inputs.name | pascal }}.tsx`
+
+```typescript
+import { FC } from &#39;react&#39;;
+
+type {{ inputs.name | pascal }}Props = {};
+
+const {{ inputs.name | pascal }}: FC&lt;{{ inputs.name | pascal }}Props&gt; = () =&gt; {
+return &lt;div&gt;{{ inputs.name }} Component&lt;/div&gt;;
+};
+
+export default {{ inputs.name | pascal}};
+```
+</code></pre><h3 id="5-実際に触ってみる">5. 実際に触ってみる。</h3>
+<p>ここまで出来たら完成です！</p>
+<p>実際に使ってみましょう。</p>
+<pre tabindex="0"><code>pnpm run scaffdog generate
+
+? Please select the output destination directory. src/components
+? Please enter components name. test
+                                                                                                                                                                                               
+🐶 Generated 3 files!                                                                                                                                                                          
+                                                                                                                                                                                               
+     ✔ src/components/Test/index.ts                                                                                                                                                           
+     ✔ src/components/Test/Test.stories.tsx                                                                                                                                                   
+     ✔ src/components/Test/Test.tsx                                                                                                                                                           
+                             
+</code></pre><p>このようにgenerateコマンドを実行すると、出力先の選択と名前を要求されます。上手くいけば雛形が自動生成されます！失敗していたらtemplate.md周りが悪さをしていると思います。
+また、コマンドだけでなくvscodeの拡張機能を追加することでvscodeからテンプレートを作成することができます。
+<a href="https://marketplace.visualstudio.com/items?itemName=scaffdog.scaffdog-vscode">https://marketplace.visualstudio.com/items?itemName=scaffdog.scaffdog-vscode</a></p>
+<p>最後にStorybookを起動し、確認しましょう！</p>
+<pre tabindex="0"><code>pnpm run storybook dev -p 6006
+</code></pre><h2 id="終わりに">終わりに</h2>
+<p>今回はscaffdogを用いて、コンポーネントの雛形を作成しました。</p>
+<p>これを使うことでコンポーネント作成時にかかるストレスが軽減されると思うので作成する必要のあるコンポーネントが多いやmkdir,touchコマンドでの作成が面倒と考えているなら導入してみてはいかがでしょうか。</p>
+<h2 id="参考にした記事一覧">参考にした記事一覧</h2>
+<p><a href="https://zenn.dev/katsumanarisawa/articles/2aeced911e5a0c">https://zenn.dev/katsumanarisawa/articles/2aeced911e5a0c</a></p>
+<p><a href="https://zenn.dev/mikakane/articles/react_storybook">https://zenn.dev/mikakane/articles/react_storybook</a></p>
+<p><a href="https://qiita.com/80andco_tech_pr/items/a3f1c4334521825cb465">https://qiita.com/80andco_tech_pr/items/a3f1c4334521825cb465</a></p>
+<p><a href="https://zenn.dev/miyaken0805/articles/d95921b135d117">https://zenn.dev/miyaken0805/articles/d95921b135d117</a></p>
+<p><a href="https://qiita.com/y-natani/items/b8034b2d7c7fbafe63bf">https://qiita.com/y-natani/items/b8034b2d7c7fbafe63bf</a></p>
+<p><a href="https://scaff.dog/docs">https://scaff.dog/docs</a></p>
+<p><a href="https://zenn.dev/rehabforjapan/articles/045a3d4c0d3bc6">https://zenn.dev/rehabforjapan/articles/045a3d4c0d3bc6</a></p>
+
+        </div>
+
+        
+        
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<footer>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 text-center mb-5">
+        <a href="https://blog.nutmeg.cloud/"><img src="https://blog.nutmeg.cloud/images/NUTMEG-logo_all_color_horizontal.png" alt="NUTMEG | 長岡技術科学大学 技大祭実行委員会 情報局"></a>
+      </div>
+      
+      <div class="col-lg-3 col-sm-6 mb-5">
+        <h6 class="mb-4">Social Contacts</h6>
+        <ul class="list-unstyled">
+          
+          <li class="mb-3"><a class="text-dark" href="https://twitter.com/nutfes_nutmeg">twitter</a></li>
+          
+          <li class="mb-3"><a class="text-dark" href="https://www.instagram.com/nutfes/?hl=ja">instagram</a></li>
+          
+          <li class="mb-3"><a class="text-dark" href="https://github.com/orgs/NUTFes">github</a></li>
+          
+        </ul>
+      </div>
+      <div class="col-lg-3 col-sm-6 mb-5">
+        <h6 class="mb-4">Categories</h6>
+        <ul class="list-unstyled">
+          <li class="mb-3"><a class="text-dark"
+              href="https://blog.nutmeg.cloud/categories/nutmeg-advent-calendar-2023">Nutmeg advent calendar 2023</a>
+          </li>
+          <li class="mb-3"><a class="text-dark"
+              href="https://blog.nutmeg.cloud/categories/nutmeg-advent-calendar-2024">Nutmeg advent calendar 2024</a>
+          </li>
+          <li class="mb-3"><a class="text-dark"
+              href="https://blog.nutmeg.cloud/categories/%e3%82%a4%e3%83%99%e3%83%b3%e3%83%88">イベント</a>
+          </li>
+          <li class="mb-3"><a class="text-dark"
+              href="https://blog.nutmeg.cloud/categories/%e3%83%81%e3%83%bc%e3%83%a0%e3%81%a5%e3%81%8f%e3%82%8a">チームづくり</a>
+          </li>
+          <li class="mb-3"><a class="text-dark"
+              href="https://blog.nutmeg.cloud/categories/%e3%83%a1%e3%83%b3%e3%83%90%e3%83%bc%e3%81%ae%e8%b6%a3%e5%91%b3">メンバーの趣味</a>
+          </li>
+          <li class="mb-3"><a class="text-dark"
+              href="https://blog.nutmeg.cloud/categories/%e5%af%be%e5%a4%96%e6%b4%bb%e5%8b%95">対外活動</a>
+          </li>
+          <li class="mb-3"><a class="text-dark"
+              href="https://blog.nutmeg.cloud/categories/%e6%b4%bb%e5%8b%95%e3%81%ae%e6%a7%98%e5%ad%90">活動の様子</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-3 col-sm-6 mb-5">
+        <h6 class="mb-4">Quick Links</h6>
+        <ul class="list-unstyled">
+          
+          <li class="mb-3"><a class="text-dark" href="https://blog.nutmeg.cloud/about">About</a></li>
+          
+          <li class="mb-3"><a class="text-dark" href="https://blog.nutmeg.cloud/blog">Post</a></li>
+          
+          <li class="mb-3"><a class="text-dark" href="https://blog.nutmeg.cloud/products">Products</a></li>
+          
+          <li class="mb-3"><a class="text-dark" href="https://blog.nutmeg.cloud/members">Members</a></li>
+          
+        </ul>
+      </div>
+      <div class="col-12 border-top py-4 text-center">
+        © NUTMEG 2024
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var indexURL = "https://blog.nutmeg.cloud/index.json"
+</script>
+
+<!-- JS Plugins -->
+
+<script src="https://blog.nutmeg.cloud/plugins/jQuery/jquery.min.js"></script>
+
+<script src="https://blog.nutmeg.cloud/plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="https://blog.nutmeg.cloud/plugins/slick/slick.min.js"></script>
+
+<script src="https://blog.nutmeg.cloud/plugins/venobox/venobox.min.js"></script>
+
+<script src="https://blog.nutmeg.cloud/plugins/search/fuse.min.js"></script>
+
+<script src="https://blog.nutmeg.cloud/plugins/search/mark.js"></script>
+
+<script src="https://blog.nutmeg.cloud/plugins/search/search.js"></script>
+
+<!-- Main Script -->
+
+<script src="https://blog.nutmeg.cloud/js/script.min.js"></script>
+
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+
+</body>
+</html>
