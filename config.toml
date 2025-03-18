@@ -11,11 +11,12 @@ languageCode = "ja"
 title = "NUTMEG | 長岡技術科学大学 技大祭実行委員会 情報局"
 theme = "liva-hugo"
 summaryLength = "2"
-paginate = 8
 disqusShortname = ""
 publishDir = "docs"
 [outputs]
   home = ["HTML", "RSS", "JSON"]
+[pagination]
+  pagerSize = 8
 
 ############################# Plugins ##############################
 [params.plugins]
