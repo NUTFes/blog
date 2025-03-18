@@ -17,35 +17,18 @@ type: "about"
 
 <div class="members-flex-box">
   <div class="members-flex-box__card">
-  <image class="members-flex-box__card__img" src="../images/members/kobayashi.png">
-  <p class="members-flex-box__card__name">ryota5884</p>
-  <div class="members-flex-box__card__body">
-    <input id="14" class="acd-check" type="checkbox">
-    <label class="acd-label" for="14">about</label>
-    <div class="acd-content">
-      <p>NUTMEG デザイナー部門所属。41st技大祭実行委員会副委員長。デザイナーとして内定もらいましたー</p>
-    </div>
-  </div>
-  <div class="members-flex-box__card__link">
-    <a class="members-flex-box__card__post-list" href="https://blog.nutmeg.cloud/authors/ryota5884/">投稿記事</a><br>
-    <a class="members-flex-box__card__post-list" href="https://pin.it/3xYYEw9">pinterest</a>
-    <a class="members-flex-box__card__post-list" href="https://student.redesigner.jp/students/5e2c3b73ba0a846b7166acc2e59eaba5">portfolio</a>
-  </div>
-</div>
-
-<div class="members-flex-box__card">
-  <image class="members-flex-box__card__img" src="../images/members/harata.png">
+   <image class="members-flex-box__card__img" src="../images/members/harata.png">
   <p class="members-flex-box__card__name">パラディン</p>
   <div class="members-flex-box__card__body">
     <input id="13" class="acd-check" type="checkbox">
     <label class="acd-label" for="13">about</label>
     <div class="acd-content">
-      <p>42nd技大祭実行委員会情報局長 兼 第3代NUTMEG代表。現在はGroup-Manager-2のPMとしてマネジメントと開発してます。趣味は飲み会、野球、スノボ、竿燈（秋田の祭り）です。「圧倒的ポジティブ思考」と「繋がりを大事に」をモットーに生きてます。</p>
+      <p>42nd情報局長 兼 42nd Group-Manager-2 PM. 現在はただの開発者. 後輩に伝えられることは伝えていきたいですね. 「圧倒的ポジティブ思考」と「繋がりを大事に」をモットーに生きてます.</p>
     </div>
   </div>
   <div class="members-flex-box__card__link">
     <a class="members-flex-box__card__post-list" href="https://blog.nutmeg.cloud/authors/paladin/">投稿記事</a><br>
-    <a class="members-flex-box__card__post-list" href="https://twitter.com/akanam521T">Twitter</a>
+    <a class="members-flex-box__card__post-list" href="">X</a>
     <a class="members-flex-box__card__post-list" href="https://github.com/harata-t">GitHub</a>
   </div>
 </div>
@@ -72,12 +55,13 @@ type: "about"
     <input id="18" class="acd-check" type="checkbox">
     <label class="acd-label" for="18">about</label>
     <div class="acd-content">
-      <p>NUTMEG バックエンド　(今後はフロントエンドも) ゲーム好きなゲーム下手の人間です。 バックエンド中心に頑張りたいです。</p>
+      <p>元SeeFT部門長。現在はフルスタックで活動しています。</p>
     </div>
   </div>
   <div class="members-flex-box__card__link">
     <a class="members-flex-box__card__post-list" href="https://blog.nutmeg.cloud/authors/nobu/">投稿記事</a><br>
     <a class="members-flex-box__card__post-list" href="https://twitter.com/@Kazuma_NUT">Twitter</a>
+    <a class="members-flex-box__card__post-list" href="https://github.com/KazumaSun">GitHub</a>
   </div>
 </div>
 
@@ -88,11 +72,12 @@ type: "about"
     <input id="20" class="acd-check" type="checkbox">
     <label class="acd-label" for="20">about</label>
     <div class="acd-content">
-      <p>FinanSuのPMしてます。フロントエンド・バックエンド・インフラをふらふらやってます。</p>
+      <p>フロントエンド・バックエンド・インフラをふらふらやってます。</p>
     </div>
   </div>
   <div class="members-flex-box__card__link">
     <a class="members-flex-box__card__post-list" href="https://blog.nutmeg.cloud/authors/kubo/">投稿記事</a><br>
+    <a class="members-flex-box__card__post-list" href="https://github.com/Kubosaka">GitHub</a>
   </div>
 </div>
 
@@ -147,21 +132,6 @@ type: "about"
 </div>
 
 <div class="members-flex-box__card">
-  <image class="members-flex-box__card__img" src="../images/members/hasegawa.png">
-  <p class="members-flex-box__card__name">なな</p>
-  <div class="members-flex-box__card__body">
-    <input id="34" class="acd-check" type="checkbox">
-    <label class="acd-label" for="34">about</label>
-    <div class="acd-content">
-      <p>NUTMEGデザイナー部門所属、HomePageとSeedsに関わっています。ロゴデザインつくるの好きです。かっこいいポートフォリオをつくるのが今年の目標。</p>
-    </div>
-  </div>
-  <div class="members-flex-box__card__link">
-    <a class="members-flex-box__card__post-list" href="https://blog.nutmeg.cloud/authors/nana/">投稿記事</a>
-  </div>
-</div>
-
-<div class="members-flex-box__card">
   <image class="members-flex-box__card__img" src="../images/members/wakatsuki.png">
   <p class="members-flex-box__card__name">つっきー</p>
   <div class="members-flex-box__card__body">
@@ -211,21 +181,6 @@ type: "about"
 </div>
 
 <div class="members-flex-box__card">
-  <image class="members-flex-box__card__img" src="../images/members/akiyama.png">
-  <p class="members-flex-box__card__name">はやて</p>
-  <div class="members-flex-box__card__body">
-    <input id="44" class="acd-check" type="checkbox">
-    <label class="acd-label" for="44">about</label>
-    <div class="acd-content">
-      <p>未経験で知識0だけど頑張ります！</p>
-    </div>
-  </div>
-  <div class="members-flex-box__card__link">
-    <a class="members-flex-box__card__post-list" href="https://blog.nutmeg.cloud/authors/hayate/">投稿記事</a><br>
-  </div>
-</div>
-
-<div class="members-flex-box__card">
   <image class="members-flex-box__card__img" src="../images/members/hikahana.png">
   <p class="members-flex-box__card__name">比嘉華</p>
   <div class="members-flex-box__card__body">
@@ -239,6 +194,21 @@ type: "about"
     <a class="members-flex-box__card__post-list" href="https://blog.nutmeg.cloud/authors/hikahana/">投稿記事</a><br>
     <a class="members-flex-box__card__post-list" href="https://x.com/mikan_hrn">Twitter</a>
     <a class="members-flex-box__card__post-list" href="https://www.instagram.com/hnd.hkr_?igsh=Ync3aDhmczJnaTBn&utm_source=qr">Instagram</a>
+  </div>
+</div>
+
+<div class="members-flex-box__card">
+  <image class="members-flex-box__card__img" src="../images/members/akiyama.png">
+  <p class="members-flex-box__card__name">はやて</p>
+  <div class="members-flex-box__card__body">
+    <input id="44" class="acd-check" type="checkbox">
+    <label class="acd-label" for="44">about</label>
+    <div class="acd-content">
+      <p>未経験で知識0だけど頑張ります！</p>
+    </div>
+  </div>
+  <div class="members-flex-box__card__link">
+    <a class="members-flex-box__card__post-list" href="https://blog.nutmeg.cloud/authors/hayate/">投稿記事</a><br>
   </div>
 </div>
 
@@ -260,4 +230,34 @@ type: "about"
   </div>
 </div>
 
+<div class="members-flex-box__card">
+  <image class="members-flex-box__card__img" src="../images/members/kobayashi.png">
+  <p class="members-flex-box__card__name">ryota5884</p>
+  <div class="members-flex-box__card__body">
+    <input id="14" class="acd-check" type="checkbox">
+    <label class="acd-label" for="14">about</label>
+    <div class="acd-content">
+      <p>NUTMEG デザイナー部門所属。41st技大祭実行委員会副委員長。デザイナーとして内定もらいましたー</p>
+    </div>
+  </div>
+  <div class="members-flex-box__card__link">
+    <a class="members-flex-box__card__post-list" href="https://blog.nutmeg.cloud/authors/ryota5884/">投稿記事</a><br>
+    <a class="members-flex-box__card__post-list" href="https://pin.it/3xYYEw9">pinterest</a>
+    <a class="members-flex-box__card__post-list" href="https://student.redesigner.jp/students/5e2c3b73ba0a846b7166acc2e59eaba5">portfolio</a>
+  </div>
+</div>
+
+<div class="members-flex-box__card">
+  <image class="members-flex-box__card__img" src="../images/members/hasegawa.png">
+  <p class="members-flex-box__card__name">なな</p>
+  <div class="members-flex-box__card__body">
+    <input id="34" class="acd-check" type="checkbox">
+    <label class="acd-label" for="34">about</label>
+    <div class="acd-content">
+      <p>元NUTMEGデザイナー部門所属、HomePageとSeedsに関わっています。</p>
+    </div>
+  </div>
+  <div class="members-flex-box__card__link">
+    <a class="members-flex-box__card__post-list" href="https://blog.nutmeg.cloud/authors/nana/">投稿記事</a>
+  </div>
 </div>
