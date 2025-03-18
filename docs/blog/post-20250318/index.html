@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="今回は私たちのプロダクトであるGroup-Manager-2（以下、GM2とします。）のユーザ画面のデザイン改修に伴い、Vue.js→NextJsに移行しました。その際に個人的に導入して見たかったscaffdogとstorybookを導入して開発効率の向上を図ってみました。">
   <meta name="author" content="NUTMEG">
-  <meta name="generator" content="Hugo 0.127.0">
+  <meta name="generator" content="Hugo 0.144.2">
 
   <!-- plugins -->
   
@@ -195,7 +195,7 @@
           </span>
         </div>
         
-        <img src="https://hackmd.io/_uploads/B1SVYLU3yx.png" class="img-fluid w-100 mb-4" alt="scaffdogのすゝめ">
+        <img src="https://blog.nutmeg.cloud/images/post/20250318.png" class="img-fluid w-100 mb-4" alt="scaffdogのすゝめ">
         
         <div class="content mb-5">
           <h2 id="始めに">始めに</h2>
@@ -228,8 +228,8 @@
                 📄index.ts
 </code></pre><h3 id="1-storybookをインストールする">1. storybookをインストールする。</h3>
 <p>GM2ではpnpmを使用しているため、pnpmでのコマンドを掲示します。必要であればnpmなどに変えて実行すると同様に実装できると思います。</p>
-<pre tabindex="0"><code>npx storybook init
-</code></pre><p>こちらのコマンドを実行することで、.storybook配下が自動的に作成されます。また、src/stories配下にサンプルが生成されていますが使う予定がない場合は削除して大丈夫です！</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">npx storybook init
+</span></span></code></pre></div><p>こちらのコマンドを実行することで、.storybook配下が自動的に作成されます。また、src/stories配下にサンプルが生成されていますが使う予定がない場合は削除して大丈夫です！</p>
 <h3 id="2-storybookの環境を作る">2. storybookの環境を作る。</h3>
 <p>生成したものに加えて設定を追加していきます。</p>
 <p>追加するものとしては</p>
@@ -240,208 +240,203 @@
 <p>まずテーマカラー設定をします。個人的にダークテーマが大好きなので実装しまました。そのため、読み飛ばしても大丈夫です。
 storybookが提供しているThemingを使います。</p>
 <p><a href="https://storybook.js.org/docs/configure/user-interface/theming">Theming | Storybook docs</a></p>
-<pre tabindex="0"><code>pnpm add --save-dev @storybook/manager-api @storybook/theming
-</code></pre><p>インストール後、preview.tsを以下のように書き換えてください。</p>
-<pre tabindex="0"><code>import type { Preview } from &#39;@storybook/react&#39;;
-import { themes } from &#39;@storybook/theming&#39;;
-
-const preview: Preview = {
-  parameters: {
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/i,
-      },
-    },
-    docs: {
-      theme: themes.dark,
-    },
-  },
-};
-
-export default preview;
-</code></pre><p>次に、autodocsを追加します。autodocsを追加するとshow codeでコードを見ることができて便利！と思ったので導入していきます。</p>
-<pre tabindex="0"><code>pnpm add @storybook/addon-docs
-</code></pre><p>でインストールし、main.tsのaddonsに追記します。</p>
-<pre tabindex="0"><code>  addons: [
-		~略~
-    &#39;@storybook/addon-docs&#39;,
-  ],
-</code></pre><p>その後、preview.tsにtagsを設定します。</p>
-<pre tabindex="0"><code>const preview: Preview = {
-  tags: [&#39;autodocs&#39;],
-  parameters: ~略~
-</code></pre><h3 id="3-scaffdogをインストールする">3. scaffdogをインストールする</h3>
-<pre tabindex="0"><code>pnpm install scaffdog
-
-pnpm run scaffdog init
-
-&gt; app@0.1.0 scaffdog /app
-&gt; scaffdog &#34;init&#34;
-
-? Please enter a document name. template
-                                                                                                                                                                                               
-Setup of scaffdog 🐶 is complete!                                                                                                                                                              
-
-  ✔ .scaffdog/config.js
-  ✔ .scaffdog/template.md
-
-Now you can do scaffold by running $ scaffdog generate.
-
-Please refer to the following documents and customize it.
-https://scaff.dog/docs/templates
-</code></pre><p><code>pnpm run scaffdog init</code> コマンドで.scaffdogフォルダを作成し、テンプレートとなるmdファイルの名称を決めることができます。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">pnpm add --save-dev @storybook/manager-api @storybook/theming
+</span></span></code></pre></div><p>インストール後、preview.tsを以下のように書き換えてください。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">import</span> <span class="kr">type</span> <span class="p">{</span> <span class="nx">Preview</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@storybook/react&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{</span> <span class="nx">themes</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@storybook/theming&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">preview</span>: <span class="kt">Preview</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">parameters</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">controls</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">matchers</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">color</span><span class="o">:</span> <span class="sr">/(background|color)$/i</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">date</span><span class="o">:</span> <span class="sr">/Date$/i</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">docs</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">theme</span>: <span class="kt">themes.dark</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="nx">preview</span><span class="p">;</span>
+</span></span></code></pre></div><p>次に、autodocsを追加します。autodocsを追加するとshow codeでコードを見ることができて便利！と思ったので導入していきます。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">pnpm add @storybook/addon-docs
+</span></span></code></pre></div><p>でインストールし、main.tsのaddonsに追記します。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl">  <span class="nx">addons</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">		<span class="o">~</span><span class="err">略</span><span class="o">~</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;@storybook/addon-docs&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="p">],</span>
+</span></span></code></pre></div><p>その後、preview.tsにtagsを設定します。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ts" data-lang="ts"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">preview</span>: <span class="kt">Preview</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">tags</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;autodocs&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">parameters</span><span class="o">:</span> <span class="o">~</span><span class="err">略</span><span class="o">~</span>
+</span></span></code></pre></div><h3 id="3-scaffdogをインストールする">3. scaffdogをインストールする</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">pnpm install scaffdog
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">pnpm run scaffdog init
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">&gt;</span> app@0.1.0 scaffdog /app
+</span></span><span class="line"><span class="cl"><span class="p">&gt;</span> scaffdog <span class="s2">&#34;init&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">? Please enter a document name. template
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Setup of scaffdog 🐶 is complete!                                                                                                                                                              
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  ✔ .scaffdog/config.js
+</span></span><span class="line"><span class="cl">  ✔ .scaffdog/template.md
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Now you can do scaffold by running $ scaffdog generate.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Please refer to the following documents and customize it.
+</span></span><span class="line"><span class="cl">https://scaff.dog/docs/templates
+</span></span></code></pre></div><p><code>pnpm run scaffdog init</code> コマンドで.scaffdogフォルダを作成し、テンプレートとなるmdファイルの名称を決めることができます。</p>
 <p>今回はtemplateとしています。</p>
 <h3 id="4-scaffdogの環境を作る">4. scaffdogの環境を作る。</h3>
 <p>template.mdが作成されたら中身を更新していきます。</p>
-<pre tabindex="0"><code>---
-name: &#34;template&#34;
-root: &#34;.&#34;
-output: &#34;src/components&#34;
-ignore: []
-questions:
-  name: &#34;Please enter components name.&#34;
----
-
-# `{{ inputs.name | pascal }}/index.ts`
-
-```typescript
-export { default } from &#34;./{{ inputs.name | pascal }}&#34;;
-```
-
-# `{{ inputs.name | pascal }}/{{ inputs.name | pascal }}.stories.tsx`
-
-```typescript
-import { Meta, StoryObj } from &#39;@storybook/react&#39;;
-import {{ inputs.name | pascal }} from &#39;./{{ inputs.name | pascal }}&#39;;
-import &#34;@globals&#34;;
-
-export default {
-title: &#39;Components/{{ inputs.name | pascal }}&#39;,
-tags: [&#34;autodocs&#34;],
-component: {{ inputs.name | pascal }},
-parameters: {
-    docs: {
-      source: {
-        type: &#34;auto&#34;,
-      },
-    },
-  },
-} as Meta&lt;typeof {{ inputs.name | pascal }}&gt;;
-
-type Story = StoryObj&lt;typeof {{ inputs.name | pascal }}&gt;;
-
-export const Default: Story = {
-  args: {
-
-  },
-};
-```
-
-# `{{ inputs.name | pascal }}/{{ inputs.name | pascal }}.tsx`
-
-```typescript
-import { FC } from &#39;react&#39;;
-
-type {{ inputs.name | pascal }}Props = {};
-
-const {{ inputs.name | pascal }}: FC&lt;{{ inputs.name | pascal }}Props&gt; = () =&gt; {
-return &lt;div&gt;{{ inputs.name }} Component&lt;/div&gt;;
-};
-
-export default {{ inputs.name | pascal}};
-```
-
-```
-
-ファイル自体は三つ作成します。
-
-- index.tsx
-- {generate}.stroies.tsx
-- {generate}.tsx
-
-です！
-
-ここでは、出力先を設定します。
-
-```
----
-name: &#34;template&#34;
-root: &#34;.&#34;
-output: &#34;src/components&#34;
-ignore: []
-questions:
-  name: &#34;Please enter components name.&#34;
----
-</code></pre><p>ここでindex.tsxを作成し、importが簡略されるようにしています。</p>
-<pre tabindex="0"><code># `{{ inputs.name | pascal }}/index.ts`
-
-```typescript
-export { default } from &#34;./{{ inputs.name | pascal }}&#34;;
-```
-</code></pre><p>ここでstroies.tsxの設定を記述しています。コンポーネントを確認する際はargsにpropsを入れてください。</p>
-<pre tabindex="0"><code># `{{ inputs.name | pascal }}/{{ inputs.name | pascal }}.stories.tsx`
-
-```typescript
-import { Meta, StoryObj } from &#39;@storybook/react&#39;;
-import {{ inputs.name | pascal }} from &#39;./{{ inputs.name | pascal }}&#39;;
-import &#34;@globals&#34;;
-
-export default {
-title: &#39;Components/{{ inputs.name | pascal }}&#39;,
-tags: [&#34;autodocs&#34;],
-component: {{ inputs.name | pascal }},
-parameters: {
-    docs: {
-      source: {
-        type: &#34;auto&#34;,
-      },
-    },
-  },
-} as Meta&lt;typeof {{ inputs.name | pascal }}&gt;;
-
-type Story = StoryObj&lt;typeof {{ inputs.name | pascal }}&gt;;
-
-export const Default: Story = {
-  args: {
-
-  },
-};
-```
-</code></pre><p>ここでは、コンポーネントの雛形を作成しています。</p>
-<pre tabindex="0"><code># `{{ inputs.name | pascal }}/{{ inputs.name | pascal }}.tsx`
-
-```typescript
-import { FC } from &#39;react&#39;;
-
-type {{ inputs.name | pascal }}Props = {};
-
-const {{ inputs.name | pascal }}: FC&lt;{{ inputs.name | pascal }}Props&gt; = () =&gt; {
-return &lt;div&gt;{{ inputs.name }} Component&lt;/div&gt;;
-};
-
-export default {{ inputs.name | pascal}};
-```
-</code></pre><h3 id="5-実際に触ってみる">5. 実際に触ってみる。</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-md" data-lang="md"><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">name: &#34;template&#34;
+</span></span><span class="line"><span class="cl">root: &#34;.&#34;
+</span></span><span class="line"><span class="cl">output: &#34;src/components&#34;
+</span></span><span class="line"><span class="cl">ignore: []
+</span></span><span class="line"><span class="cl">questions:
+</span></span><span class="line"><span class="cl">  name: &#34;Please enter components name.&#34;
+</span></span><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gh"># `{{ inputs.name | pascal }}/index.ts`
+</span></span></span><span class="line"><span class="cl"><span class="gh"></span>
+</span></span><span class="line"><span class="cl"><span class="s">```typescript
+</span></span></span><span class="line"><span class="cl"><span class="s"></span><span class="kr">export</span> <span class="p">{</span> <span class="k">default</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;./{{ inputs.name | pascal }}&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="s">```</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gh"># `{{ inputs.name | pascal }}/{{ inputs.name | pascal }}.stories.tsx
+</span></span></span><span class="line"><span class="cl"><span class="gh"></span>
+</span></span><span class="line"><span class="cl"><span class="s">```typescript
+</span></span></span><span class="line"><span class="cl"><span class="s"></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">Meta</span><span class="p">,</span> <span class="nx">StoryObj</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@storybook/react&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{{</span> <span class="nx">inputs</span><span class="p">.</span><span class="nx">name</span> <span class="o">|</span> <span class="nx">pascal</span> <span class="p">}}</span> <span class="kr">from</span> <span class="s1">&#39;./{{ inputs.name | pascal }}&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="s2">&#34;@globals&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Components/{{ inputs.name | pascal }}&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="nx">tags</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;autodocs&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="nx">component</span><span class="o">:</span> <span class="p">{{</span> <span class="nx">inputs</span><span class="p">.</span><span class="nx">name</span> <span class="o">|</span> <span class="nx">pascal</span> <span class="p">}},</span>
+</span></span><span class="line"><span class="cl"><span class="nx">parameters</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">docs</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">source</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">type</span><span class="o">:</span> <span class="s2">&#34;auto&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="kr">as</span> <span class="nx">Meta</span><span class="p">&lt;</span><span class="nt">typeof</span> <span class="p">{{</span> <span class="na">inputs.name</span> <span class="err">|</span> <span class="na">pascal</span> <span class="p">}}&gt;;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">Story</span> <span class="o">=</span> <span class="nx">StoryObj</span><span class="p">&lt;</span><span class="nt">typeof</span> <span class="p">{{</span> <span class="na">inputs.name</span> <span class="err">|</span> <span class="na">pascal</span> <span class="p">}}&gt;;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">Default</span>: <span class="kt">Story</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">args</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="s">```</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gh"># `{{ inputs.name | pascal }}/{{ inputs.name | pascal }}.tsx`
+</span></span></span><span class="line"><span class="cl"><span class="gh"></span>
+</span></span><span class="line"><span class="cl"><span class="s">```typescript
+</span></span></span><span class="line"><span class="cl"><span class="s"></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">FC</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">type</span> <span class="p">{{</span> <span class="nx">inputs</span><span class="p">.</span><span class="nx">name</span> <span class="o">|</span> <span class="nx">pascal</span> <span class="p">}}</span><span class="nx">Props</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="p">{{</span> <span class="nx">inputs</span><span class="p">.</span><span class="nx">name</span> <span class="o">|</span> <span class="nx">pascal</span> <span class="p">}}</span><span class="o">:</span> <span class="nx">FC</span><span class="o">&lt;</span><span class="p">{{</span> <span class="nx">inputs</span><span class="p">.</span><span class="nx">name</span> <span class="o">|</span> <span class="nx">pascal</span> <span class="p">}}</span><span class="nx">Props</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">return</span> <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;{{</span> <span class="nx">inputs</span><span class="p">.</span><span class="nx">name</span> <span class="p">}}</span> <span class="nx">Component</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{{</span> <span class="nx">inputs</span><span class="p">.</span><span class="nx">name</span> <span class="o">|</span> <span class="nx">pascal</span><span class="p">}};</span>
+</span></span><span class="line"><span class="cl"><span class="s">```</span>
+</span></span></code></pre></div><p>ファイル自体は三つ作成します。</p>
+<ul>
+<li>index.tsx</li>
+<li>{generate}.stroies.tsx</li>
+<li>{generate}.tsx</li>
+</ul>
+<p>です！</p>
+<p>ここでは、出力先を設定します。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-md" data-lang="md"><span class="line"><span class="cl">---
+</span></span><span class="line"><span class="cl">name: &#34;template&#34;
+</span></span><span class="line"><span class="cl">root: &#34;.&#34;
+</span></span><span class="line"><span class="cl">output: &#34;src/components&#34;
+</span></span><span class="line"><span class="cl">ignore: []
+</span></span><span class="line"><span class="cl">questions:
+</span></span><span class="line"><span class="cl">  name: &#34;Please enter components name.&#34;
+</span></span><span class="line"><span class="cl">---
+</span></span></code></pre></div><p>ここでindex.tsxを作成し、importが簡略されるようにしています。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-md" data-lang="md"><span class="line"><span class="cl"><span class="gh"># `{{ inputs.name | pascal }}/index.ts`
+</span></span></span><span class="line"><span class="cl"><span class="gh"></span>
+</span></span><span class="line"><span class="cl"><span class="s">```typescript
+</span></span></span><span class="line"><span class="cl"><span class="s"></span><span class="kr">export</span> <span class="p">{</span> <span class="k">default</span> <span class="p">}</span> <span class="kr">from</span> <span class="s2">&#34;./{{ inputs.name | pascal }}&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="s">```</span>
+</span></span></code></pre></div><p>ここでstroies.tsxの設定を記述しています。コンポーネントを確認する際はargsにpropsを入れてください。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-md" data-lang="md"><span class="line"><span class="cl"><span class="gh"># `{{ inputs.name | pascal }}/{{ inputs.name | pascal }}.stories.tsx`
+</span></span></span><span class="line"><span class="cl"><span class="gh"></span>
+</span></span><span class="line"><span class="cl"><span class="s">```typescript
+</span></span></span><span class="line"><span class="cl"><span class="s"></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">Meta</span><span class="p">,</span> <span class="nx">StoryObj</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;@storybook/react&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="p">{{</span> <span class="nx">inputs</span><span class="p">.</span><span class="nx">name</span> <span class="o">|</span> <span class="nx">pascal</span> <span class="p">}}</span> <span class="kr">from</span> <span class="s1">&#39;./{{ inputs.name | pascal }}&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="s2">&#34;@globals&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Components/{{ inputs.name | pascal }}&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="nx">tags</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;autodocs&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="nx">component</span><span class="o">:</span> <span class="p">{{</span> <span class="nx">inputs</span><span class="p">.</span><span class="nx">name</span> <span class="o">|</span> <span class="nx">pascal</span> <span class="p">}},</span>
+</span></span><span class="line"><span class="cl"><span class="nx">parameters</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">docs</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">source</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">type</span><span class="o">:</span> <span class="s2">&#34;auto&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="kr">as</span> <span class="nx">Meta</span><span class="p">&lt;</span><span class="nt">typeof</span> <span class="p">{{</span> <span class="na">inputs.name</span> <span class="err">|</span> <span class="na">pascal</span> <span class="p">}}&gt;;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">type</span> <span class="nx">Story</span> <span class="o">=</span> <span class="nx">StoryObj</span><span class="p">&lt;</span><span class="nt">typeof</span> <span class="p">{{</span> <span class="na">inputs.name</span> <span class="err">|</span> <span class="na">pascal</span> <span class="p">}}&gt;;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="kr">const</span> <span class="nx">Default</span>: <span class="kt">Story</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">args</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="s">```</span>
+</span></span></code></pre></div><p>ここでは、コンポーネントの雛形を作成しています。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-md" data-lang="md"><span class="line"><span class="cl"><span class="gh"># `{{ inputs.name | pascal }}/{{ inputs.name | pascal }}.tsx`
+</span></span></span><span class="line"><span class="cl"><span class="gh"></span>
+</span></span><span class="line"><span class="cl"><span class="s">```typescript
+</span></span></span><span class="line"><span class="cl"><span class="s"></span><span class="kr">import</span> <span class="p">{</span> <span class="nx">FC</span> <span class="p">}</span> <span class="kr">from</span> <span class="s1">&#39;react&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">type</span> <span class="p">{{</span> <span class="nx">inputs</span><span class="p">.</span><span class="nx">name</span> <span class="o">|</span> <span class="nx">pascal</span> <span class="p">}}</span><span class="nx">Props</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="p">{{</span> <span class="nx">inputs</span><span class="p">.</span><span class="nx">name</span> <span class="o">|</span> <span class="nx">pascal</span> <span class="p">}}</span><span class="o">:</span> <span class="nx">FC</span><span class="o">&lt;</span><span class="p">{{</span> <span class="nx">inputs</span><span class="p">.</span><span class="nx">name</span> <span class="o">|</span> <span class="nx">pascal</span> <span class="p">}}</span><span class="nx">Props</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">return</span> <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;{{</span> <span class="nx">inputs</span><span class="p">.</span><span class="nx">name</span> <span class="p">}}</span> <span class="nx">Component</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">export</span> <span class="k">default</span> <span class="p">{{</span> <span class="nx">inputs</span><span class="p">.</span><span class="nx">name</span> <span class="o">|</span> <span class="nx">pascal</span><span class="p">}};</span>
+</span></span><span class="line"><span class="cl"><span class="s">```</span>
+</span></span></code></pre></div><h3 id="5-実際に触ってみる">5. 実際に触ってみる。</h3>
 <p>ここまで出来たら完成です！</p>
 <p>実際に使ってみましょう。</p>
-<pre tabindex="0"><code>pnpm run scaffdog generate
-
-? Please select the output destination directory. src/components
-? Please enter components name. test
-                                                                                                                                                                                               
-🐶 Generated 3 files!                                                                                                                                                                          
-                                                                                                                                                                                               
-     ✔ src/components/Test/index.ts                                                                                                                                                           
-     ✔ src/components/Test/Test.stories.tsx                                                                                                                                                   
-     ✔ src/components/Test/Test.tsx                                                                                                                                                           
-                             
-</code></pre><p>このようにgenerateコマンドを実行すると、出力先の選択と名前を要求されます。上手くいけば雛形が自動生成されます！失敗していたらtemplate.md周りが悪さをしていると思います。
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">pnpm run scaffdog generate
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">? Please select the output destination directory. src/components
+</span></span><span class="line"><span class="cl">? Please enter components name. test
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">🐶 Generated 3 files!                                                                                                                                                                          
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">     ✔ src/components/Test/index.ts                                                                                                                                                           
+</span></span><span class="line"><span class="cl">     ✔ src/components/Test/Test.stories.tsx                                                                                                                                                   
+</span></span><span class="line"><span class="cl">     ✔ src/components/Test/Test.tsx                                                                                                                                                           
+</span></span></code></pre></div><p>このようにgenerateコマンドを実行すると、出力先の選択と名前を要求されます。上手くいけば雛形が自動生成されます！失敗していたらtemplate.md周りが悪さをしていると思います。
 また、コマンドだけでなくvscodeの拡張機能を追加することでvscodeからテンプレートを作成することができます。
 <a href="https://marketplace.visualstudio.com/items?itemName=scaffdog.scaffdog-vscode">https://marketplace.visualstudio.com/items?itemName=scaffdog.scaffdog-vscode</a></p>
 <p>最後にStorybookを起動し、確認しましょう！</p>
-<pre tabindex="0"><code>pnpm run storybook dev -p 6006
-</code></pre><h2 id="終わりに">終わりに</h2>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">pnpm run storybook dev -p 6006
+</span></span></code></pre></div><h2 id="終わりに">終わりに</h2>
 <p>今回はscaffdogを用いて、コンポーネントの雛形を作成しました。</p>
 <p>これを使うことでコンポーネント作成時にかかるストレスが軽減されると思うので作成する必要のあるコンポーネントが多いやmkdir,touchコマンドでの作成が面倒と考えているなら導入してみてはいかがでしょうか。</p>
 <h2 id="参考にした記事一覧">参考にした記事一覧</h2>
