@@ -320,7 +320,7 @@ type: "about"
   </div>
   <div class="members-flex-box__card__link">
     <a class="members-flex-box__card__post-list" href="https://blog.nutmeg.cloud/authors/F/">投稿記事</a><br>
-    <a class="members-flex-box__card__post-list" href="https://github.com/yuzukiefu">Github</a>
+    <a class="members-flex-box__card__post-list" href="https://github.com/y2-yue">Github</a>
   </div>
 </div>
 
