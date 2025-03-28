@@ -6,8 +6,15 @@
     <description>Recent content in GitHub on NUTMEG | 長岡技術科学大学 技大祭実行委員会 情報局</description>
     <generator>Hugo</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 24 Dec 2024 15:43:58 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 28 Mar 2025 09:36:16 +0900</lastBuildDate>
     <atom:link href="https://blog.nutmeg.cloud/tags/github/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>EngineerGuildHackathonに参加してきました</title>
+      <link>https://blog.nutmeg.cloud/blog/post-20250328/</link>
+      <pubDate>Fri, 28 Mar 2025 09:36:16 +0900</pubDate>
+      <guid>https://blog.nutmeg.cloud/blog/post-20250328/</guid>
+      <description>&lt;h1 id=&#34;はじめに&#34;&gt;はじめに&lt;/h1&gt;&#xA;&lt;img width=&#34;50%&#34; height=&#34;50%&#34; src=&#34;https://hackmd.io/_uploads/ry50yBd21g.jpg&#34;&gt;&#xD;&#xA;&lt;p&gt;こんにちは、ゆめみんです。先日小学校の同窓会に出席してきたのですが、タイムカプセルからカービィが出土しました。&#xA;当時の私に、10年後はもっとたくさんのカービィに囲まれて幸せだよと伝えたいです。&#xA;&lt;/br&gt;&#xA;&lt;img src=&#34;https://hackmd.io/_uploads/S1QTWxu21g.png&#34; alt=&#34;image&#34;&gt;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Babylon.jsでMMDに挑戦してみた。</title>
       <link>https://blog.nutmeg.cloud/blog/post-ac-20241224/</link>
