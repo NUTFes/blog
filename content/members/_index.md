@@ -326,7 +326,7 @@ type: "about"
 
 <div class="members-flex-box__card">
   <image class="members-flex-box__card__img" src="../images/members/wako.jpeg">
-  <p class="members-flex-box__card__name">わこ</p>
+  <p class="members-flex-box__card__name">むぎちゃ</p>
   <div class="members-flex-box__card__body">
     <input id="53" class="acd-check" type="checkbox">
     <label class="acd-label" for="53">about</label>
