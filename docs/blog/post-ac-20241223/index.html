@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="普段slackでやり取りしているサークルで、discordのボイスチャンネルの入退室をslackで分かるようにしたいという悩みを解決しました。">
   <meta name="author" content="NUTMEG">
-  <meta name="generator" content="Hugo 0.140.0">
+  <meta name="generator" content="Hugo 0.152.2">
 
   <!-- plugins -->
   
@@ -324,8 +324,8 @@ SLACK_WEBHOOK_URL=https://hooks.slack.com/services/....
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">tty</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">env_file</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;./.env&#34;</span><span class="p">]</span><span class="w">
 </span></span></span></code></pre></div><h3 id="dockerfile">dockerfile</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> python:3.11-slim</span><span class="err">
-</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /app</span><span class="err">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="w"> </span><span class="s">python:3.11-slim</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span><span class="err">
 </span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> apt-get update <span class="o">&amp;&amp;</span> apt-get install -y <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>    build-essential <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>    <span class="o">&amp;&amp;</span> rm -rf /var/lib/apt/lists/*<span class="err">
